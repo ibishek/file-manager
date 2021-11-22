@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
@@ -11,8 +13,9 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_landing_page_opens_properly()
     {
-        $this->assertTrue(true);
+        $response = $this->get('/');
+        $response->assertStatus(200);
     }
 }

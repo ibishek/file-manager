@@ -19,8 +19,9 @@ class DatabaseSeeder extends Seeder
         try {
             DB::beginTransaction();
             $this->call(UserSeeder::class);
+            $this->call(FileProgressSeeder::class);
             DB::commit();
-            (new ConsoleOutput())->writeln('User successfully created');
+            (new ConsoleOutput())->writeln('User created successfully');
         } catch (\Exception $e) {
             DB::rollback();
             dd("Exception: {$e->getMessage()}");
