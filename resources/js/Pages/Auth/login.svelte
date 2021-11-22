@@ -13,7 +13,7 @@
     <title>Login - File Manager</title>
 </svelte:head>
 <div
-    class="container p-12 w-9/12 sm:w-2/4 md:w-1/4  mt-48 mx-auto bg-blue-300 rounded-lg"
+    class="container p-12 w-9/12 sm:w-2/4 lg:w-1/4  mt-48 mx-auto bg-blue-300 rounded-lg"
 >
     <h1 class="text-green-900 font-bold text-2xl text-center">
         Enter your credentials here

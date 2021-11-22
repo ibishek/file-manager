@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Models\User;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\{
+    DashboardController,
+    FileController,
+    FileOwnerController,
+    StaffController
+};
 
 
 /*
@@ -27,8 +30,9 @@ require_once 'ext/auth.php';
 //this is for dashboard
 Route::middleware(['auth'])->group(function () {
     Route::prefix('api')->group(function () {
-        Route::get('dashboard', function () {
-            return Inertia::render('Dashboard/app');
-        })->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'show'])->name('dashboard');
+        Route::resource('files', FileController::class);
+        Route::resource('file-owners', FileOwnerController::class);
+        Route::resource('staffs', StaffController::class);
     });
 });
