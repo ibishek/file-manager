@@ -1,6 +1,6 @@
 <script>
-    import Sidebar from "./../Layouts/Sidebar.svelte";
-    import Navbar from "./../Layouts/Navbar.svelte";
+    import Sidebar from "./../../Layouts/Sidebar.svelte";
+    import Navbar from "./../../Layouts/Navbar.svelte";
     let showSidebarMenu = false;
     const showSidebar = (event) => {
         showSidebarMenu = event.detail;
@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-    <title>Dashboard - File Manager</title>
+    <title>Staff - File Manager</title>
 </svelte:head>
 <Navbar on:showSidebar={showSidebar} />
 
