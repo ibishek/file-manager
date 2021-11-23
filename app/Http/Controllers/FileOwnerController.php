@@ -17,7 +17,7 @@ class FileOwnerController extends Controller
     {
         $fileOwners = FileOwner::when($request->name, function ($query, $name) {
             $query->where('full_name', 'like', "%$name%");
-        })->select('full_name', 'country')->latest()->paginate(10);
+        })->select('id', 'full_name', 'country')->latest()->paginate(10);
 
         return Inertia::render('Dashboard/File-Owners/index', [
             'fileOwners' => $fileOwners
@@ -40,12 +40,12 @@ class FileOwnerController extends Controller
 
     public function show($id)
     {
-        //
+        dd(FileOwner::findOrFail($id));
     }
 
     public function edit($id)
     {
-        //
+        dd(FileOwner::findOrFail($id));
     }
 
     public function update(Request $request, $id)
