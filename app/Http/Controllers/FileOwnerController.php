@@ -4,12 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\FileOwner;
+use App\Http\Requests\StoreFileOwnerRequest;
+use App\Services\FileOwners\{
+    onStoreService,
+    onUpdateService
+};
 
 class FileOwnerController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard/File-Owners/index');
+        $fileOwners = FileOwner::all('full_name', 'country');
+        return Inertia::render('Dashboard/File-Owners/index', [
+            'fileOwners' => $fileOwners
+        ]);
     }
 
     public function create()
@@ -17,9 +26,13 @@ class FileOwnerController extends Controller
         return Inertia::render('Dashboard/File-Owners/create');
     }
 
-    public function store(Request $request)
-    {
-        //
+    public function store(
+        StoreFileOwnerRequest $request,
+        onStoreService $onStore
+    ) {
+        return $onStore->fileownerSave($request->validated()) ?
+            redirect('api/file-owners')->with('success', 'File owner created successfully !!!') :
+            redirect()->back()->withInput()->with('errors', 'Error: While creating file owners. This is a server side error.');
     }
 
     public function show($id)

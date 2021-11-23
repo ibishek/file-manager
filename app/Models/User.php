@@ -33,6 +33,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function fileOwners(): HasMany
     {
-        return $this->hasMany(FileOwner::class, 'user_id', 'id');
+        return $this->hasMany(FileOwner::class, 'user_id');
     }
 }
