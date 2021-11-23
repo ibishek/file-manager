@@ -1,4 +1,5 @@
 <script>
+    import Search from "./../../Components/Shared/Search.svelte";
     import Success from "./../../Components/Shared/Success.svelte";
     import Breadcrumb from "./../../Components/Shared/Breadcrumb.svelte";
     import Sidebar from "./../../Layouts/Sidebar.svelte";
@@ -11,13 +12,13 @@
         showSidebarMenu = event.detail;
     };
     export let fileOwners = null; // index table value
-    function populateSearch() {
-        let url = `/api/file-owners?name=${searchParam}`;
-        if (searchParam === null || searchParam === "") {
-            url = "/api/file-owners";
-        }
-        Inertia.visit(url, { only: ["fileOwners"] });
-    }
+    // function populateSearch() {
+    //     let url = `/api/file-owners?name=${searchParam}`;
+    //     if (searchParam === null || searchParam === "") {
+    //         url = "/api/file-owners";
+    //     }
+    //     Inertia.visit(url, { only: ["fileOwners"] });
+    // }
 </script>
 
 <svelte:head>
@@ -32,7 +33,7 @@
         <Breadcrumb />
         <Success condition={$page.props.flash.success} />
         <div class="bg-white mt-4 py-6 px-8 rounded-lg shadow-md">
-            <div class="text-gray-600 mb-4">
+            <!-- <div class="text-gray-600 mb-4">
                 <input
                     class="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
                     type="search"
@@ -58,7 +59,8 @@
                         />
                     </svg>
                 </button>
-            </div>
+            </div> -->
+            <Search />
             <table class="table w-full">
                 <thead class="text-left bg-gray-100 text-gray-800">
                     <tr>
