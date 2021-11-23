@@ -26,7 +26,7 @@
         </svg>
     </button>
     <span class="px-4">/</span>
-    <span class="text-gray-800 capitalize">{links[2]}</span>
+    <span class="text-gray-800 capitalize">{links[2].split("?")[0]}</span>
     <span class="px-4">/</span>
     {#if links.length === 3}
         <span class="text-gray-800 capitalize"> Index </span>

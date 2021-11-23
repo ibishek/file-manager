@@ -13,9 +13,12 @@ use App\Services\FileOwners\{
 
 class FileOwnerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $fileOwners = FileOwner::all('full_name', 'country');
+        $fileOwners = FileOwner::when($request->name, function ($query, $name) {
+            $query->where('full_name', 'like', "%$name%");
+        })->select('full_name', 'country')->latest()->paginate(10);
+
         return Inertia::render('Dashboard/File-Owners/index', [
             'fileOwners' => $fileOwners
         ]);
