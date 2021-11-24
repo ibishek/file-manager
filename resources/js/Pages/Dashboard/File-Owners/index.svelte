@@ -66,8 +66,8 @@
                                 method: "get",
                                 href: `${fileOwners.prev_page_url}`,
                             }}
-                            class="p-2 text-sm bg-blue-500 rounded-lg
-                        shadow-lg hover:text-blue-500 hover:bg-gray-200"
+                            class="p-2 text-sm bg-blue-500 text-white border rounded-lg
+                        shadow-lg hover:text-blue-500 hover:bg-gray-200 hover:border-blue-500"
                             >Previous</button
                         >
                     {/if}
@@ -77,7 +77,7 @@
                                 method: "get",
                                 href: `${fileOwners.next_page_url}`,
                             }}
-                            class="p-2 text-sm bg-blue-500 rounded-lg shadow-lg hover:text-blue-500 hover:bg-gray-200"
+                            class="p-2 text-sm bg-blue-500 text-white border rounded-lg shadow-lg hover:text-blue-500 hover:bg-gray-200 hover:border-blue-500"
                             >Next</button
                         >
                     {/if}

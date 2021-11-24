@@ -25,9 +25,7 @@ class UpdateFileOwnerRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => ['required', 'string', 'min:2'],
-            'middlename' => ['nullable', 'string', 'min:2'],
-            'lastname' => ['required', 'string', 'min:2'],
+            'full_name' => ['required', 'string', 'min:4'],
             'email' => ['nullable', 'email'],
             'phone' => ['nullable', 'string'],
             'street_address_one' => ['required', 'string'],
@@ -40,7 +38,7 @@ class UpdateFileOwnerRequest extends FormRequest
     public function attributes()
     {
         return [
-            'lastname' => 'familyname',
+            'full_name' => 'full name',
             'email' => 'email address',
             'phone' => 'phone number',
         ];

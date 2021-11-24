@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\FileOwner;
-use App\Http\Requests\StoreFileOwnerRequest;
+use App\Http\Requests\{
+    StoreFileOwnerRequest,
+    UpdateFileOwnerRequest
+};
 use App\Services\FileOwners\{
     onStoreService,
     onUpdateService
@@ -40,21 +43,33 @@ class FileOwnerController extends Controller
 
     public function show($id)
     {
-        dd(FileOwner::findOrFail($id));
+        // dd(FileOwner::findOrFail($id));
+        return Inertia::render('Dashboard/File-Owners/show', [
+            'fileOwner' => FileOwner::findOrFail($id)
+        ]);
     }
 
     public function edit($id)
     {
-        dd(FileOwner::findOrFail($id));
+        return Inertia::render('Dashboard/File-Owners/edit', [
+            'fileOwner' => FileOwner::findOrFail($id)
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateFileOwnerRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+        $fileOwner = FileOwner::findOrFail($id);
+        return $fileOwner->update($validated) ?
+            redirect("api/file-owners/{$fileOwner->id}")->with('success', 'File-Owner updated successfully') :
+            redirect()->back()->withInput();
     }
 
     public function destroy($id)
     {
-        //
+        $fileOwner = FileOwner::findOrFail($id);
+        return $fileOwner->delete() ?
+            redirect('api/file-owners')->with('success', 'File-Owner deleted successfully') :
+            redirect()->bakc();
     }
 }

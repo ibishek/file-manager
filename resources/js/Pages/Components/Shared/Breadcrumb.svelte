@@ -1,5 +1,6 @@
 <script>
     import { inertia, page } from "@inertiajs/inertia-svelte";
+    export let name = null;
     const links = $page.url.split("/");
 </script>
 
@@ -28,9 +29,11 @@
     <span class="px-4">/</span>
     <span class="text-gray-800 capitalize">{links[2].split("?")[0]}</span>
     <span class="px-4">/</span>
-    {#if links.length === 3}
-        <span class="text-gray-800 capitalize"> Index </span>
-    {:else}
+    {#if links.length > 3 && name}
+        <span class="text-gray-800 capitalize"> {name} </span>
+    {:else if links.length > 3 && !name}
         <span class="text-gray-800 capitalize"> {links[3]} </span>
+    {:else if links.length === 3}
+        <span class="text-gray-800 capitalize"> Index </span>
     {/if}
 </div>
