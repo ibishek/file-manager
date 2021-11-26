@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\{
     Auth\AuthController,
-    Auth\PasswordController
+    Auth\PasswordController,
+    Auth\FirstTimePasswordChangeController
 };
+
+Route::get('/staff/password-reset', [FirstTimePasswordChangeController::class, 'change'])->name('password-reset');
+Route::put('/staff/password-reset', [FirstTimePasswordChangeController::class, 'changeAttempt']);
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'loginAttempt']);

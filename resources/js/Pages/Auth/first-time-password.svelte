@@ -1,21 +1,24 @@
 <script>
     import { useForm, inertia, page } from "@inertiajs/inertia-svelte";
-    let credentials = useForm({
-        email: null,
+    export let user = null;
+    let passwords = useForm({
+        id: user.id,
         password: null,
+        confirm: null,
     });
-    const loginAttempt = () => {
-        $credentials.post("/login");
+    let type = "password";
+    const passwordChange = () => {
+        $passwords.put("/staff/password-reset");
     };
-    $: if ($credentials.hasErrors) {
+    $: if ($passwords.hasErrors) {
         setInterval(() => {
-            $credentials.clearErrors();
+            $passwords.clearErrors();
         }, 3000);
     }
 </script>
 
 <svelte:head>
-    <title>Login - File Manager</title>
+    <title>{user.name} - Password Change</title>
 </svelte:head>
 <div class="w-full h-screen bg-black relative">
     <img
@@ -44,10 +47,12 @@
     <div
         class="absolute p-12 w-full sm:w-3/4 md:w-6/12 lg:w-96 h-2/4 m-auto inset-0 backdrop-filter backdrop-blur lg:backdrop-blur-0"
     >
-        <h1 class="font-bold text-5xl text-center text-white">Welcome ):</h1>
-        {#if $page.props.flash.success}
+        <p class="text-white font-extrabold text-xl pl-4">
+            Dear, {user.name}
+        </p>
+        {#if $page.props.flash.error}
             <p class="text-white text-xl mt-4 text-center">
-                {$page.props.flash.success}
+                {$page.props.flash.error}
             </p>
         {/if}
         <form
@@ -55,45 +60,37 @@
             method="post"
             autocomplete="off"
             class="mt-8"
-            on:submit|preventDefault={loginAttempt}
+            on:submit|preventDefault={passwordChange}
         >
             <div class="gap-4">
                 <input
-                    type="email"
-                    name="email"
+                    type="password"
+                    name="password"
                     class="form-input p-4 w-full rounded-full bg-gray-50 outline-none opacity-50"
-                    bind:value={$credentials.email}
-                    error={$credentials.email}
-                    placeholder="Email"
+                    bind:value={$passwords.password}
+                    placeholder="Enter new password"
                 />
-                {#if $credentials.errors.email}
+                {#if $passwords.errors.password}
                     <span class="text-white font-normal px-4"
-                        >{$credentials.errors.email}</span
+                        >{$passwords.errors.password}</span
                     >
                 {/if}
             </div>
             <div class="mt-4">
                 <input
                     type="password"
-                    name="password"
-                    class="form-input p-4 w-full rounded-full outline-none bg-gray-50 opacity-50"
-                    bind:value={$credentials.password}
-                    placeholder="Password"
+                    name="confirm"
+                    class="form-input p-4 w-full rounded-full bg-gray-50 outline-none opacity-50"
+                    bind:value={$passwords.confirm}
+                    placeholder="Confirm password"
                 />
             </div>
             <input
                 type="submit"
                 class="p-4 mt-4 rounded-full w-full bg-red-400 text-white cursor-pointer tracking-widest hover:bg-red-500 hover:shadow-xl"
-                value="LOGIN"
-                disabled={$credentials.processing}
+                value="CHANGE PASSWORD"
+                disabled={$passwords.precessing}
             />
-            <button
-                type="button"
-                class="p-4 mt-4 rounded-full w-full bg-indigo-400 text-white tracking-widest hover:bg-indigo-500 hover:shadow-xl"
-                use:inertia={{ href: "/login/dev", method: "post" }}
-            >
-                &lt; DEV LOGIN &#47;&gt;
-            </button>
         </form>
     </div>
 </div>

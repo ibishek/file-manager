@@ -105,6 +105,12 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
+        'exception' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/exception.log'),
+            'level' => 'info'
+        ],
+
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,

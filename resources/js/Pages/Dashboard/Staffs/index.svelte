@@ -14,7 +14,7 @@
 </script>
 
 <svelte:head>
-    <title>File Owners - File Manager</title>
+    <title>Staffs - File Manager</title>
 </svelte:head>
 <Navbar on:showSidebar={showSidebar} />
 

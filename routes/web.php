@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\FullPage404Exception;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\{
@@ -35,4 +36,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('file-owners', FileOwnerController::class);
         Route::resource('staffs', StaffController::class);
     });
+});
+
+Route::fallback(function () {
+    throw new FullPage404Exception("Please, do not type url directly !!!", 404);
 });

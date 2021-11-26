@@ -21,6 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'is_active',
+        'email_verified_at'
     ];
 
     protected $hidden = [
@@ -32,8 +34,18 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function fileOwners(): HasMany
     {
         return $this->hasMany(FileOwner::class, 'user_id');
+    }
+
+    public function hasColumnChanged()
+    {
+        return $this->updated_at->gt($this->created_at) ? true : false;
     }
 }

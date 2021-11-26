@@ -208,7 +208,7 @@
         </ul>
     </nav>
 
-    <div class="absolute bottom-0 my-10">
+    <div class="absolute bottom-0 my-10 z-10">
         <a
             class="flex items-center py-2 px-8 text-gray-500 hover:text-gray-600"
             href="https://github.com/ibishek/file-manager"
@@ -234,7 +234,9 @@
 </aside>
 
 {#if showSidebar}
-    <aside class="w-64 md:w-48 lg:w-64  h-screen bg-white md:hidden">
+    <aside
+        class="absolute z-20 w-64 md:w-48 lg:w-64  h-screen bg-white md:hidden"
+    >
         <div class="flex items-center justify-center mt-10">
             <img
                 class="h-6"
