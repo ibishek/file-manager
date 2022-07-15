@@ -17,7 +17,7 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.3.11",
-        "svelte": "^3.44.2",
+        "svelte": "^3.49.0",
         "svelte-loader": "^3.1.2",
         "tailwindcss": "^2.2.19"
     },
